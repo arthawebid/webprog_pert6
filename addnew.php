@@ -1,3 +1,16 @@
+<?php
+    if(isset($_POST["txNIM"])){
+        $pdata["NIM"] = $_POST["txNIM"];
+        $pdata["NAMA"] = $_POST["txNAMA"];
+        $pdata["JUR"] = $_POST["txJUR"];
+        $pdata["JK"] = $_POST["txJK"];
+        $pdata["TALAG"] = $_POST["txTALAG"];
+        $pdata["PASS"] = $_POST["txPASSS"];
+        include_once("curd.php");
+        storedata($pdata);
+        header("location: index.php");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,8 +23,7 @@
 <body>
     <div class="container">
     <h3>Tambah Data Mahasiswa</h3>
-    <form action="dbinsertdatamhs.php" method="POST">
-
+    <form action="addnew.php" method="POST">
         NIM
         <div>
         <input type="text" name="txNIM" class="form-control" >
