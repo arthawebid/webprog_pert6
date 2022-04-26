@@ -1,6 +1,17 @@
 <?php
     include_once("konfigurasi.php");
-
+    /**
+     * Function storedata
+     * digunakan untuk menambahkan data baru kedalam tabel mhs
+     * parameter: pdata[]
+     *  pdata["NIM"]
+     *  pdata["NAMA"]
+     *  pdata["JUR"]
+     *  pdata["TALAG"]
+     *  pdata["PASS"]
+     * 
+     * output: true/false
+     */
     function storedata($pdata){
         $NIM= $pdata["NIM"];
         $NAMA=$pdata["NAMA"];
@@ -14,6 +25,18 @@
         $hsl = mysqli_query($cnn, $sql);
         return $hsl;
     }
+    /**
+     * Function updatedata
+     * digunakan untuk menyimpan perubahan data
+     * Parameter: pdata
+     *  pdata["NIM"]
+     *  pdata["NAMA"]
+     *  pdata["JUR"]
+     *  pdata["TALAG"]
+     *  pdata["PASS"]
+     * 
+     * output: true/false
+     */
     function updatedata($pdata){
         $NIM= $pdata["NIM"];
         $NAMA=$pdata["NAMA"];
@@ -26,12 +49,27 @@
         $hsl = mysqli_query($cnn, $sql);
         return $hsl;
     }
+    /**
+     * Function destroydata
+     * digunakan untuk menghapus data mhs berdasarkan NIM
+     * Parameter: pdata
+     *  pdata["NIM"]
+     * 
+     * output: -
+     */
     function destroydata($pdata){
         $nim = $pdata["NIM"];
         $sql = "DELETE FROM mhs WHERE NIM='".$nim."';";
         $cnn = mysqli_connect(DBHOST,DBUSER,DBPASCODE,DBNAME,DBPORT) or die("Koneksi ke DBMS Mysql gagal<br>");
         $hsl = mysqli_query($cnn, $sql);
     }
+    /**
+     * Function listdata
+     * digunakan untuk menampilkan seluruh data dalam format tabel
+     * Parameter: -
+     * 
+     * output: -
+     */
     function listdata(){
         $cnn = mysqli_connect(DBHOST,DBUSER,DBPASCODE,DBNAME,DBPORT) or die("Koneksi ke DBMS Mysql gagal<br>");
         $sql = "SELECT NIM, NAMA, JURUSAN, JK, TGLLAHIR, PASSCODE FROM mhs;";
@@ -57,6 +95,19 @@
         }
         return $hsl1;
     }
+    /**
+     * Function listdatanim
+     * digunakan untuk mencari data mhs berdasarkan NIM
+     * parameter: nim
+     * 
+     * output: pdata
+     *  pdata["NIM"]
+     *  pdata["NAMA"] 
+     *  pdata["JUR"] 
+     *  pdata["JK"] 
+     *  pdata["TALAG"] 
+     *  pdata["PASS"]
+     */
     function listdatanim($nim){
         $sql = "SELECT NIM, NAMA, JURUSAN, JK, TGLLAHIR, PASSCODE FROM mhs WHERE NIM='$nim';";
         $cnn = mysqli_connect(DBHOST,DBUSER,DBPASCODE,DBNAME,DBPORT) or die("Koneksi ke DBMS Mysql gagal<br>");
